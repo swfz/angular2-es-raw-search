@@ -1,3 +1,44 @@
-<h1>
-  {{title}}
-</h1>
+<div class="container">
+  <h1>
+    Elasticsearch Log Search
+    <i class="fa fa-twitter"></i>
+  </h1>
+  <div class="form-horizontal">
+    <form #f="ngForm">
+      <div class="form-group">
+        <label class="control-label col-xs-2">date</label>
+        <ng2-datepicker [options]="options" name="date" ngModel></ng2-datepicker>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-xs-2">code</label>
+        <div class="col-xs-5">
+          <input class="form-control" name="code" type="text" ngModel>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-xs-2">path</label>
+        <div class="col-xs-5">
+          <input class="form-control" name="path" type="text" ngModel>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-xs-2">method</label>
+        <div class="col-xs-5">
+          <input class="form-control" name="method" type="text" ngModel>
+        </div>
+      </div>
+      <div class="form-group">
+        <button class="btn btn-primary" (click)="search(f.value)" >Submit</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<span>{{f.value|json}}</span>
+<div class="container">
+  <div class="col-xs-3">code</div>
+  <div class="col-xs-3">path</div>
+  <div class="col-xs-3">time</div>
+</div>
+
+
