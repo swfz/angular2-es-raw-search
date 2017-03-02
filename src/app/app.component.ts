@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from "../environments/environment";
 import { EsSearchService } from "./services/es-search.service";
+import { config } from "./config";
 import * as moment from 'moment';
 
 @Component({
@@ -28,6 +29,7 @@ export class AppComponent implements OnInit {
   }
 
   search(params: any): void {
+    console.log(config);
     console.log(params.date);
     console.log(moment(params.date).format('YYYY-MM-DD'));
     console.log('called component search')
