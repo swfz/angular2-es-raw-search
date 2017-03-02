@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {GridOptions} from "ag-grid";
+import {GridOptions, Grid} from "ag-grid";
 
 @Component({
   selector: 'ag-grid',
@@ -10,7 +10,15 @@ export class AgGridComponent implements OnInit {
   private gridOptions: GridOptions;
 
   constructor() {
-    this.gridOptions = {};
+    this.gridOptions = <GridOptions>{
+      enableSorting :true,
+      enableFilter :true,
+      enableColResize :true,
+      rowHeight :10,
+      //Enterprise
+      enableStatusBar :true,
+      enableRangeSelection :true
+    };
     this.gridOptions.columnDefs = [
       {
         headerName: "ID",
