@@ -2,39 +2,44 @@ import {Injectable} from '@angular/core';
 import { Observable } from 'rxjs';
 import {Headers, Http, Response, URLSearchParams} from '@angular/http';
 import {environment} from "../../environments/environment";
+import * as moment from 'moment';
 
 @Injectable()
 
 export class EsSearchService {
   private esUrl = environment.esUrl;
-//  private _client = new elasticsearch.Client
+  private indices: string;
 
-  constructor(
-    private http: Http,
-  ){
+  constructor(private http: Http){}
+
+  search(params: any): any{
+
+    this.indices = moment(params.date).format('YYYY-MM-DD');
+    let jsonQuery = this.buildQueries(params);
+    let fullPath = this.esUrl + '/twitter.ads-' + this.indices + '/_search';
+
+    //console.log(fullPath)
+    return this.http.post(fullPath, jsonQuery)
+      .map(this.extractData)
+      .catch(this.handleError);
   }
 
-  search(query: string): any{
-
-    let params = {
+  buildQueries(params: any): any {
+    let queries = {
       "query": {
-        "multi_match": {
-          "query": query,
-          "type": "cross_fields",
-          "fields": [
-            "title^5",
-            "heading^4",
-            "text^3"
+        "bool": {
+          "filter": [
+            {
+              "term": {
+                "account_id": params.account_id
+              }
+            }
           ]
         }
       }
     };
 
-    let fullPath = this.esUrl + '/docs/_search';
-    //console.log(fullPath)
-    return this.http.post(fullPath, params)
-      .map(this.extractData)
-      .catch(this.handleError);
+    return queries
   }
 
   extractData(res: Response) {

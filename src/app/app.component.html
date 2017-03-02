@@ -1,33 +1,51 @@
 <div class="container">
-  <h1>
-    Elasticsearch Log Search
-    <i class="fa fa-twitter"></i>
-  </h1>
+  <div class="col-xs-2"></div>
+  <div class="col-xs-10">
+    <h1>
+      Elasticsearch Log Search
+      <i class="fa fa-twitter"></i>
+    </h1>
+  </div>
   <div class="form-horizontal">
     <form #f="ngForm">
       <div class="form-group">
-        <label class="control-label col-xs-2">date</label>
-        <ng2-datepicker [options]="options" name="date" ngModel></ng2-datepicker>
+        <label class="control-label col-xs-3">date</label>
+        <div class="col-xs-8">
+          <datepicker name="date" ngModel></datepicker>
+        </div>
       </div>
       <div class="form-group">
-        <label class="control-label col-xs-2">code</label>
-        <div class="col-xs-5">
+        <label class="control-label col-xs-3" tooltip="perfect match">code</label>
+        <div class="col-xs-8">
           <input class="form-control" name="code" type="text" ngModel>
         </div>
       </div>
       <div class="form-group">
-        <label class="control-label col-xs-2">path</label>
-        <div class="col-xs-5">
+        <label class="control-label col-xs-3" tooltip="partial match">path</label>
+        <div class="col-xs-8">
           <input class="form-control" name="path" type="text" ngModel>
         </div>
       </div>
       <div class="form-group">
-        <label class="control-label col-xs-2">method</label>
-        <div class="col-xs-5">
+        <label class="control-label col-xs-3" tooltip="perfect match">method</label>
+        <div class="col-xs-8">
           <input class="form-control" name="method" type="text" ngModel>
         </div>
       </div>
       <div class="form-group">
+        <label class="control-label col-xs-3" tooltip="perfect match">account id</label>
+        <div class="col-xs-8">
+          <input class="form-control" name="account_id" type="text" ngModel>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-xs-3" tooltip="partial match">body</label>
+        <div class="col-xs-8">
+          <input class="form-control" name="body" type="text" ngModel>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-5"></div>
         <button class="btn btn-primary" (click)="search(f.value)" >Submit</button>
       </div>
     </form>

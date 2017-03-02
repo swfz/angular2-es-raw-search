@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from "../environments/environment";
 import { EsSearchService } from "./services/es-search.service";
-import { DatePickerOptions, DateModel } from 'ng2-datepicker';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-root',
@@ -10,21 +10,35 @@ import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 })
 export class AppComponent implements OnInit {
 
-  private date: DateModel;
-  private options: DatePickerOptions;
+  public format: 'YYYY-MM-DD';
+  public dateOptions: any = {
+    formatYear: 'YYYY',
+    startingDay: 1
+  };
+
+  private opened: boolean = false;
 
   constructor(
     private esSearchService: EsSearchService
   ) {
-    this.options = new DatePickerOptions();
+
   }
   ngOnInit(): void {
     console.log(environment)
   }
 
   search(params: any): void {
-    console.log(params);
+    console.log(params.date);
+    console.log(moment(params.date).format('YYYY-MM-DD'));
     console.log('called component search')
+    this.esSearchService.search(params).subscribe(
+      data => {
+        console.log(data);
+      },
+      error => {
+        console.log('search error');
+      }
+    );
   }
 }
 

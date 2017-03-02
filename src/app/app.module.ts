@@ -4,7 +4,6 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import * as bootstrap from 'ng2-bootstrap';
-import { DatePickerModule } from 'ng2-datepicker';
 
 import { AppComponent } from './app.component';
 import { EsSearchService } from "./services/es-search.service";
@@ -30,7 +29,6 @@ import { EsSearchService } from "./services/es-search.service";
     bootstrap.TabsModule.forRoot(),
     bootstrap.TimepickerModule.forRoot(),
     bootstrap.TypeaheadModule.forRoot(),
-    DatePickerModule,
   ],
   providers: [
     EsSearchService
