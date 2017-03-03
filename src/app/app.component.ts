@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
     formatYear: 'YYYY',
     startingDay: 1
   };
+  private searchedData: any = [];
 
   private opened: boolean = false;
 
@@ -24,10 +25,14 @@ export class AppComponent implements OnInit {
   ) {
 
   }
+
   ngOnInit(): void {
     console.log(environment)
   }
 
+  debug(): void {
+    console.log(this.searchedData);
+  }
   search(params: any): void {
     console.log(config);
     console.log(params.date);
@@ -35,6 +40,7 @@ export class AppComponent implements OnInit {
     console.log('called component search')
     this.esSearchService.search(params).subscribe(
       data => {
+        this.searchedData = data.hits.hits.map(row => row._source);
         console.log(data);
       },
       error => {

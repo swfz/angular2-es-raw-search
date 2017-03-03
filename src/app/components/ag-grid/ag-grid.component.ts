@@ -1,46 +1,96 @@
-import { Component, OnInit } from '@angular/core';
-import {GridOptions, Grid} from "ag-grid";
+import {Component, Input, OnInit, OnChanges, SimpleChanges} from '@angular/core';
+import {GridOptions, Grid } from "ag-grid";
 
 @Component({
-  selector: 'ag-grid',
+  selector: 'app-ag-grid',
   templateUrl: './ag-grid.component.html',
   styleUrls: ['./ag-grid.component.scss']
 })
-export class AgGridComponent implements OnInit {
+export class AgGridComponent implements OnChanges {
+  @Input() searchedData: any;
+
   private gridOptions: GridOptions;
 
-  constructor() {
+  constructor(
+  ) {
     this.gridOptions = <GridOptions>{
       enableSorting :true,
       enableFilter :true,
       enableColResize :true,
-      rowHeight :10,
+      rowHeight :30,
+      enableCellChangeFlash :true,
       //Enterprise
       enableStatusBar :true,
       enableRangeSelection :true
     };
     this.gridOptions.columnDefs = [
       {
-        headerName: "ID",
-        field: "id",
+        headerName: "finished",
+        field: "finished",
+        width: 150
+      },
+      {
+        headerName: "account ID",
+        field: "account_id",
         width: 100
       },
       {
-        headerName: "Value",
-        field: "value",
+        headerName: "method",
+        field: "payload_request_method",
+        width: 100
+      },
+      {
+        headerName: "path",
+        field: "payload_request_path",
+        width: 100
+      },
+      {
+        headerName: "body",
+        field: "payload_request_body_0",
+        width: 100
+      },
+      {
+        headerName: "code",
+        field: "payload_response_code",
 //        cellRendererFramework: RedComponentComponent,
         width: 100
       },
+      {
+        headerName: "body",
+        field: "payload_response_body",
+        width: 400
+      }
 
     ];
-    this.gridOptions.rowData = [
-      {id: 5, value: 10},
-      {id: 10, value: 15},
-      {id: 15, value: 20}
-    ]
+    this.gridOptions.rowData = this.searchedData;
+//    this.gridOptions.rowData = [
+//      [5,10],
+//      [10,15],
+//      [18,30]
+//    ]
   }
 
   ngOnInit() {
+  }
+
+  ngOnChanges(changes: any) {
+    console.log('changed');
+    console.log(changes);
+//    this.gridOptions.rowData = this.searchedData;
+    if ( this.gridOptions.api ) {
+      this.gridOptions.api.setRowData(this.searchedData);
+    }
+//    this.resultGrid.api.refreshView();
+//    this.gridOptions.api.setRowData(this.searchedData);
+    console.log(this.gridOptions.rowData);
+  }
+
+  debug(): void {
+    console.log('ag-grid component');
+    console.log(this);
+//    this.resultGrid.gridOptions.api.refreshView();
+    console.log( typeof (this.gridOptions.api.setRowData) === 'function')
+    this.gridOptions.api.setRowData(this.searchedData);
   }
 
 }

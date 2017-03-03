@@ -21,7 +21,7 @@ import { EsSearchService } from "./services/es-search.service";
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    AgGridModule,
+    AgGridModule.withComponents([]),
     bootstrap.AlertModule.forRoot(),
     bootstrap.ButtonsModule.forRoot(),
     bootstrap.CollapseModule.forRoot(),

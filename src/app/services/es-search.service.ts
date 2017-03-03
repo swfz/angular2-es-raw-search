@@ -22,10 +22,11 @@ export class EsSearchService {
     return this.http.post(fullPath, jsonQuery)
       .map(this.extractData)
       .catch(this.handleError);
-  }
 
+  }
   buildQueries(params: any): any {
     let queries = {
+      "size": params.size,
       "query": {
         "bool": {
           "filter": [

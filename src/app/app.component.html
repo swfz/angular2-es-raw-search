@@ -45,6 +45,14 @@
         </div>
       </div>
       <div class="form-group">
+        <label class="control-label col-xs-3" tooltip="max fetch size">size</label>
+        <div class="col-xs-8">
+          <select class="form-control" name="size" ngModel>
+            <option class="form-control" *ngFor="let n of [10,50,100,500,1000]" value="{{ n }}">{{ n }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
         <div class="col-xs-5"></div>
         <button class="btn btn-primary" (click)="search(f.value)" >Submit</button>
       </div>
@@ -52,12 +60,10 @@
   </div>
 </div>
 
+<button class="btn btn-warning" (click)="debug()" >Debug</button>
+
 <span>{{f.value|json}}</span>
 <div class="container">
-  <div class="col-xs-3">code</div>
-  <div class="col-xs-3">path</div>
-  <div class="col-xs-3">time</div>
+  <app-ag-grid [searchedData]="searchedData"></app-ag-grid>
 </div>
 
-
-<ag-grid></ag-grid>
