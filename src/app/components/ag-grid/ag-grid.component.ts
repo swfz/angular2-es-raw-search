@@ -1,5 +1,7 @@
+///<reference path="ag-grid-cell/ag-grid-cell-json-data/ag-grid-cell-json-data.component.ts"/>
 import {Component, Input, OnInit, OnChanges, SimpleChanges} from '@angular/core';
 import {GridOptions, Grid } from "ag-grid";
+import {AgGridCellJsonDataComponent} from "./ag-grid-cell/ag-grid-cell-json-data/ag-grid-cell-json-data.component";
 
 @Component({
   selector: 'app-ag-grid',
@@ -45,19 +47,20 @@ export class AgGridComponent implements OnChanges {
         width: 100
       },
       {
-        headerName: "body",
+        headerName: "request body",
         field: "payload_request_body_0",
         width: 100
       },
       {
         headerName: "code",
         field: "payload_response_code",
-//        cellRendererFramework: RedComponentComponent,
         width: 100
       },
       {
-        headerName: "body",
+        headerName: "response body",
         field: "payload_response_body",
+        cellRendererFramework: AgGridCellJsonDataComponent,
+//        enableTooltip : true,
         width: 400
       }
 

@@ -10,18 +10,20 @@ import { AppComponent } from './app.component';
 import { AgGridComponent } from './components/ag-grid/ag-grid.component';
 
 import { EsSearchService } from "./services/es-search.service";
+import { AgGridCellJsonDataComponent } from './components/ag-grid/ag-grid-cell/ag-grid-cell-json-data/ag-grid-cell-json-data.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AgGridComponent,
+    AgGridCellJsonDataComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
-    AgGridModule.withComponents([]),
+    AgGridModule.withComponents([AgGridCellJsonDataComponent]),
     bootstrap.AlertModule.forRoot(),
     bootstrap.ButtonsModule.forRoot(),
     bootstrap.CollapseModule.forRoot(),
