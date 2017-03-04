@@ -10,9 +10,16 @@
         </button>
       </div>
       <div class="modal-body" style="user-select: text;">
-        <pre>
-{{formattedJson}}
-        </pre>
+        <table class="table-striped table-bordered">
+          <tr class="row">
+            <td class="col-sm-3">Key</td>
+            <td class="col-sm-3">Value</td>
+          </tr>
+          <tr class="row" *ngFor="let r of searchParams">
+            <td class="col-sm-5 column">{{r[0]}}</td>
+            <td class="col-sm-7 column">{{r[1]}}</td>
+          </tr>
+        </table>
       </div>
     </div>
   </div>

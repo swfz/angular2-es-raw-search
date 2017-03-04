@@ -2,6 +2,7 @@
 import {Component, Input, OnInit, OnChanges, SimpleChanges} from '@angular/core';
 import {GridOptions, Grid } from "ag-grid";
 import {AgGridCellJsonDataComponent} from "./ag-grid-cell/ag-grid-cell-json-data/ag-grid-cell-json-data.component";
+import {AgGridCellSearchParamsComponent} from "./ag-grid-cell/ag-grid-cell-search-params/ag-grid-cell-search-params.component";
 
 @Component({
   selector: 'app-ag-grid',
@@ -49,6 +50,7 @@ export class AgGridComponent implements OnChanges {
       {
         headerName: "request body",
         field: "payload_request_body_0",
+        cellRendererFramework: AgGridCellSearchParamsComponent,
         width: 100
       },
       {
@@ -60,17 +62,12 @@ export class AgGridComponent implements OnChanges {
         headerName: "response body",
         field: "payload_response_body",
         cellRendererFramework: AgGridCellJsonDataComponent,
-//        enableTooltip : true,
         width: 400
       }
 
     ];
     this.gridOptions.rowData = this.searchedData;
-//    this.gridOptions.rowData = [
-//      [5,10],
-//      [10,15],
-//      [18,30]
-//    ]
+
   }
 
   ngOnInit() {
