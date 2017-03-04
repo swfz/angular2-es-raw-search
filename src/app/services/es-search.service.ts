@@ -18,7 +18,7 @@ export class EsSearchService {
     let jsonQuery = this.buildQueries(params);
     let fullPath = this.esUrl + '/twitter.ads-' + this.indices + '/_search';
 
-    //console.log(fullPath)
+    console.log(fullPath)
     return this.http.post(fullPath, jsonQuery)
       .map(this.extractData)
       .catch(this.handleError);

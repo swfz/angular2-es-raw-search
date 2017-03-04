@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  esUrl: "192.168.30.14:9200"
+  esUrl: "http://192.168.30.14:9200"
 };
