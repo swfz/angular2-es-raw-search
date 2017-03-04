@@ -45,6 +45,7 @@ export class AgGridComponent implements OnChanges {
       {
         headerName: "path",
         field: "payload_request_path",
+        cellRendererFramework: AgGridCellSearchParamsComponent,
         width: 100
       },
       {

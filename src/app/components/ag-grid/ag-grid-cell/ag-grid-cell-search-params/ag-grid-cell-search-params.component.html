@@ -9,7 +9,10 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body" style="user-select: text;">
+      <div *ngIf="path" class="modal-header">
+        {{ path }}
+      </div>
+      <div *ngIf="searchParams.length > 0" class="modal-body" style="user-select: text;">
         <table class="table-striped table-bordered">
           <tr class="row">
             <td class="col-sm-3">Key</td>

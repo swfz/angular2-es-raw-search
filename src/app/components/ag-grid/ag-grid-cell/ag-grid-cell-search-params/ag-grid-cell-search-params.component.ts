@@ -11,12 +11,33 @@ export class AgGridCellSearchParamsComponent {
   private params: any;
   private searchParams: any;
   private headerName: string;
+  private path: string;
 
   agInit(params: any){
     this.params = params;
 
-    this.searchParams = this.parseParams(params.value);
     this.headerName = params.colDef.headerName;
+
+    this.path = this.parsePath(params.value);
+
+    let body  = this.parseBody(params.value);
+    this.searchParams = this.parseParams(body);
+  }
+
+  parsePath(str: string): string {
+    if (str) {
+      return ( this.withPath(str) ) ? str.split('?')[0] : "";
+    }
+  }
+
+  parseBody(str: string): string {
+    if (str) {
+      return ( this.withPath(str) ) ? str.split('?')[1] : str;
+    }
+  }
+
+  withPath(str: string): boolean {
+    return str.split('?').length > 1  or str.match(/\//);
   }
 
   parseParams(searchStrings: string): any {
