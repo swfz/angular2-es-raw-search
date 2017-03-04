@@ -37,7 +37,9 @@ export class AgGridCellSearchParamsComponent {
   }
 
   withPath(str: string): boolean {
-    return str.split('?').length > 1  or str.match(/\//);
+    if (str) {
+      return ( str.match(/\?/) && str.split('?').length > 1 ) || ( str.match(/\//) && str.match(/\//).length > 0);
+    }
   }
 
   parseParams(searchStrings: string): any {
@@ -46,7 +48,6 @@ export class AgGridCellSearchParamsComponent {
     if ( searchStrings ) {
       q = searchStrings.split('&').map( keyValueString => keyValueString.split('=').map( v => decodeURIComponent(v)) );
     }
-    console.log(q);
 
     return q;
   }

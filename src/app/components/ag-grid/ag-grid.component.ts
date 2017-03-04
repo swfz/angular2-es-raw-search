@@ -1,5 +1,5 @@
 ///<reference path="ag-grid-cell/ag-grid-cell-json-data/ag-grid-cell-json-data.component.ts"/>
-import {Component, Input, OnInit, OnChanges, SimpleChanges} from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {GridOptions, Grid } from "ag-grid";
 import {AgGridCellJsonDataComponent} from "./ag-grid-cell/ag-grid-cell-json-data/ag-grid-cell-json-data.component";
 import {AgGridCellSearchParamsComponent} from "./ag-grid-cell/ag-grid-cell-search-params/ag-grid-cell-search-params.component";
@@ -71,27 +71,11 @@ export class AgGridComponent implements OnChanges {
 
   }
 
-  ngOnInit() {
-  }
-
   ngOnChanges(changes: any) {
-    console.log('changed');
-    console.log(changes);
-//    this.gridOptions.rowData = this.searchedData;
+    //console.log(this.gridOptions.rowData);
     if ( this.gridOptions.api ) {
       this.gridOptions.api.setRowData(this.searchedData);
     }
-//    this.resultGrid.api.refreshView();
-//    this.gridOptions.api.setRowData(this.searchedData);
-    console.log(this.gridOptions.rowData);
-  }
-
-  debug(): void {
-    console.log('ag-grid component');
-    console.log(this);
-//    this.resultGrid.gridOptions.api.refreshView();
-    console.log( typeof (this.gridOptions.api.setRowData) === 'function')
-    this.gridOptions.api.setRowData(this.searchedData);
   }
 
 }

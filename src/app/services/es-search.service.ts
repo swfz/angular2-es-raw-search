@@ -15,32 +15,74 @@ export class EsSearchService {
   search(params: any): any{
 
     this.indices = moment(params.date).format('YYYY-MM-DD');
-    let jsonQuery = this.buildQueries(params);
+    let jsonQuery = this.buildRequestBody(params);
     let fullPath = this.esUrl + '/twitter.ads-' + this.indices + '/_search';
 
-    console.log(fullPath)
     return this.http.post(fullPath, jsonQuery)
       .map(this.extractData)
       .catch(this.handleError);
 
   }
-  buildQueries(params: any): any {
-    let queries = {
-      "size": params.size,
-      "query": {
-        "bool": {
-          "filter": [
-            {
-              "term": {
-                "account_id": params.account_id
+  buildRequestBody(params: any): any {
+    let bodyParams = { "size": params.size };
+
+    let paramsCount = Object.keys(params).filter(k => params[k].length > 0).length;
+    if (paramsCount > 1) {
+      bodyParams["query"] = {"bool": {"filter": []}};
+    }
+
+    if (params.account_id) {
+      bodyParams["query"]["bool"]["filter"].push(
+       {
+          "term":
+            { "account_id": params.account_id }
+        }
+      );
+    }
+
+    if (params.code) {
+      bodyParams["query"]["bool"]["filter"].push(
+        {
+          "terms":
+            { "payload_response_code": params.code.split(',') }
+        }
+      );
+    }
+
+    if (params.path) {
+      bodyParams["query"]["bool"]["filter"].push(
+        {
+          "wildcard":
+            {"payload_request_path": '*' + params.path + '*' }
+        }
+      );
+    }
+
+    if (params.method) {
+      bodyParams["query"]["bool"]["filter"].push(
+        {
+          "term":
+            {"payload_request_method": params.method }
+        }
+      );
+    }
+
+    if (params.body) {
+      bodyParams["query"]["bool"]["filter"].push(
+        {
+          "filtered":{
+            "query": {
+              "query_string": {
+                "analyze_wildcard": true,
+                "query": params.body
               }
             }
-          ]
+          }
         }
-      }
-    };
+      );
+    }
 
-    return queries
+    return bodyParams;
   }
 
   extractData(res: Response) {
@@ -49,7 +91,6 @@ export class EsSearchService {
     }
     return res.json();
   }
-
 
   handleError (error: any) {
     let errMsg = error.message || 'Server error';
