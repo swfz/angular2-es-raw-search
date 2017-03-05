@@ -26,6 +26,7 @@ import { AgGridCellSearchParamsComponent } from './components/ag-grid/ag-grid-ce
     ReactiveFormsModule,
     HttpModule,
     AgGridModule.withComponents([AgGridCellJsonDataComponent,AgGridCellSearchParamsComponent]),
+    bootstrap.AccordionModule.forRoot(),
     bootstrap.AlertModule.forRoot(),
     bootstrap.ButtonsModule.forRoot(),
     bootstrap.CollapseModule.forRoot(),

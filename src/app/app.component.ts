@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
     startingDay: 1
   };
   private searchedData: any = [];
+  private isSearching: boolean = false;
 
   private opened: boolean = false;
 
@@ -29,10 +30,10 @@ export class AppComponent implements OnInit {
   }
 
   search(params: any): void {
+    this.isSearching = ( this.isSearching ) ? false : true;
     this.esSearchService.search(params).subscribe(
       data => {
         this.searchedData = data.hits.hits.map(row => row._source);
-        // console.log(data);
       },
       error => {
         console.log('search error');
