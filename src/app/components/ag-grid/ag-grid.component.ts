@@ -11,8 +11,7 @@ import {AgGridCellSearchParamsComponent} from "./ag-grid-cell/ag-grid-cell-searc
 })
 export class AgGridComponent implements OnChanges {
   @Input() searchedData: any;
-  @Input() isSearching: boolean;
-  @Output() isSearchingChange = new EventEmitter<boolean>();
+  @Input() isSearchingToggle: boolean;
 
   private gridOptions: GridOptions;
 
@@ -22,7 +21,7 @@ export class AgGridComponent implements OnChanges {
       enableSorting :true,
       enableFilter :true,
       enableColResize :true,
-      rowHeight :30,
+      rowHeight :50,
       enableCellChangeFlash :true,
       //Enterprise
       enableStatusBar :true,
@@ -70,7 +69,6 @@ export class AgGridComponent implements OnChanges {
 
     ];
     this.gridOptions.rowData = this.searchedData;
-
   }
 
   ngOnChanges(changes: any) {
@@ -78,7 +76,7 @@ export class AgGridComponent implements OnChanges {
       if ( changes.searchedData ) {
         this.gridOptions.api.hideOverlay();
         this.gridOptions.api.setRowData(this.searchedData);
-        this.isSearchingChange.emit(false);
+//        this.isSearchingToggleChange.emit(false);
       }
 
       if ( changes.isSearching ) {

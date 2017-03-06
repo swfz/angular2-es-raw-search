@@ -16,8 +16,10 @@ export class AppComponent implements OnInit {
     formatYear: 'YYYY',
     startingDay: 1
   };
+  public isConditionCollapsed: boolean = true;
+
   private searchedData: any = [];
-  private isSearching: boolean = false;
+  private isSearchingToggle: boolean = false;
 
   private opened: boolean = false;
 
@@ -30,7 +32,8 @@ export class AppComponent implements OnInit {
   }
 
   search(params: any): void {
-    this.isSearching = ( this.isSearching ) ? false : true;
+    this.isSearchingToggle = !this.isSearchingToggle;
+    this.isConditionCollapsed = false;
     this.esSearchService.search(params).subscribe(
       data => {
         this.searchedData = data.hits.hits.map(row => row._source);
@@ -40,5 +43,6 @@ export class AppComponent implements OnInit {
       }
     );
   }
+
 }
 
