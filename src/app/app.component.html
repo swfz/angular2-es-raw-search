@@ -13,11 +13,11 @@
 <div class="container">
   <div class="form-horizontal">
     <accordion>
-      <accordion-group #group>
-        <div accordion-heading>
+      <accordion-group #searchConditionGroup [isOpen]="!isConditionAccordionOpen">
+        <div accordion-heading (click)="isConditionAccordionOpen = !isConditionAccordionOpen">
           Search Conditions
           <i class="pull-right float-xs-right glyphicon"
-             [ngClass]="{'glyphicon-chevron-down': group?.isOpen, 'glyphicon-chevron-right': !group?.isOpen}"></i>
+            [ngClass]="{'glyphicon-chevron-down': searchConditionGroup?.isOpen, 'glyphicon-chevron-right': !searchConditionGroup?.isOpen}"></i>
         </div>
         <form #f="ngForm">
           <div class="form-group">
@@ -74,14 +74,15 @@
       </accordion-group>
     </accordion>
   </div>
-
-  <button type="button" class="btn btn-primary"
-          (click)="isConditionCollapsed = !isConditionCollapsed">Toggle collapse
-  </button>
-  <div [collapse]="isConditionCollapsed" class="card card-block card-header">
+<button (click)="debug()">DEBUG</button>
+<!--  <div [collapse]="isConditionCollapsed" class="card card-block card-header">-->
+  <div [collapse]="isConditionAccordionOpen" class="card card-block card-header">
   <div class="well well-lg">
-    <div>Conditions</div>
-    {{f.value|json}}
+    <h4>Conditions</h4>
+    <div *ngFor="let key of ['date','code','path','method','account_id','size']" class="row">
+      <div class="col-sm-2">{{key}}</div>
+      <div class="col-sm-10">{{f.value[key]}}</div>
+    </div>
   </div>
 </div>
 

@@ -11,17 +11,17 @@ import * as moment from 'moment';
 })
 export class AppComponent implements OnInit {
 
+  private opened: boolean = false;
   public format: 'YYYY-MM-DD';
   public dateOptions: any = {
     formatYear: 'YYYY',
     startingDay: 1
   };
-  public isConditionCollapsed: boolean = true;
 
   private searchedData: any = [];
+  private isConditionCollapsed: boolean = true;
   private isSearchingToggle: boolean = false;
-
-  private opened: boolean = false;
+  private isConditionAccordionOpen: boolean = true;
 
   constructor(
     private esSearchService: EsSearchService
@@ -32,8 +32,9 @@ export class AppComponent implements OnInit {
   }
 
   search(params: any): void {
-    this.isSearchingToggle = !this.isSearchingToggle;
+    this.isSearchingToggle =  ( this.isSearchingToggle ) ? false : true;
     this.isConditionCollapsed = false;
+    this.isConditionAccordionOpen = false;
     this.esSearchService.search(params).subscribe(
       data => {
         this.searchedData = data.hits.hits.map(row => row._source);
@@ -42,6 +43,10 @@ export class AppComponent implements OnInit {
         console.log('search error');
       }
     );
+  }
+
+  debug() {
+    console.log(this.isConditionAccordionOpen)
   }
 
 }

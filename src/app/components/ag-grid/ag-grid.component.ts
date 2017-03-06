@@ -68,7 +68,7 @@ export class AgGridComponent implements OnChanges {
       }
 
     ];
-    this.gridOptions.rowData = this.searchedData;
+    this.gridOptions.rowData = [];
   }
 
   ngOnChanges(changes: any) {
@@ -76,10 +76,9 @@ export class AgGridComponent implements OnChanges {
       if ( changes.searchedData ) {
         this.gridOptions.api.hideOverlay();
         this.gridOptions.api.setRowData(this.searchedData);
-//        this.isSearchingToggleChange.emit(false);
       }
 
-      if ( changes.isSearching ) {
+      if ( changes.isSearchingToggle ) {
         this.gridOptions.api.showLoadingOverlay();
       }
     }
