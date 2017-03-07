@@ -19,9 +19,9 @@ export class AppComponent implements OnInit {
   };
 
   private searchedData: any = [];
-  private isConditionCollapsed: boolean = true;
+  private totalCount: number;
+  private displayCount: number;
   private isSearchingToggle: boolean = false;
-  private isConditionAccordionOpen: boolean = true;
 
   constructor(
     private esSearchService: EsSearchService
@@ -33,20 +33,16 @@ export class AppComponent implements OnInit {
 
   search(params: any): void {
     this.isSearchingToggle =  ( this.isSearchingToggle ) ? false : true;
-    this.isConditionCollapsed = false;
-    this.isConditionAccordionOpen = false;
     this.esSearchService.search(params).subscribe(
       data => {
         this.searchedData = data.hits.hits.map(row => row._source);
+        this.totalCount   = data.hits.total;
+        this.displayCount = data.hits.hits.length;
       },
       error => {
         console.log('search error');
       }
     );
-  }
-
-  debug() {
-    console.log(this.isConditionAccordionOpen)
   }
 
 }

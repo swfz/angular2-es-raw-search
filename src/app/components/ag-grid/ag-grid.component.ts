@@ -31,7 +31,7 @@ export class AgGridComponent implements OnChanges {
       {
         headerName: "finished",
         field: "finished",
-        width: 150
+        width: 180
       },
       {
         headerName: "account ID",
@@ -41,13 +41,13 @@ export class AgGridComponent implements OnChanges {
       {
         headerName: "method",
         field: "payload_request_method",
-        width: 100
+        width: 60
       },
       {
         headerName: "path",
         field: "payload_request_path",
         cellRendererFramework: AgGridCellSearchParamsComponent,
-        width: 100
+        width: 150
       },
       {
         headerName: "request body",
@@ -58,7 +58,7 @@ export class AgGridComponent implements OnChanges {
       {
         headerName: "code",
         field: "payload_response_code",
-        width: 100
+        width: 80
       },
       {
         headerName: "response body",
