@@ -12,8 +12,14 @@ export class AgGridCellJsonDataComponent {
 
   agInit(params: any): void {
     this.params = params;
-    let jsonObject = JSON.parse(params.value);
-    this.formattedJson = JSON.stringify(jsonObject,null,"\t");
+    try {
+      let jsonObject = JSON.parse(params.value);
+      this.formattedJson = JSON.stringify(jsonObject,null,"\t");
+    }
+    catch(e) {
+      this.formattedJson = params.value;
+      console.log("Error: " + e);
+    }
     this.headerName = params.colDef.headerName;
   }
 

@@ -28,19 +28,31 @@
           </div>
           <div class="form-group">
             <label class="control-label col-xs-3" tooltip="perfect match">code</label>
-            <div class="col-xs-8">
+            <div class="col-xs-2">
+              <input id="not_code" name="not_code" type="checkbox" ngModel>
+              <label for="not_code">Not mutch</label>
+            </div>
+            <div class="col-xs-6">
               <input class="form-control" name="code" type="text" ngModel>
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-xs-3" tooltip="partial match">path</label>
-            <div class="col-xs-8">
+             <div class="col-xs-2">
+              <input id="not_path" name="not_path" type="checkbox" ngModel>
+              <label for="not_path">Not mutch</label>
+            </div>
+            <div class="col-xs-6">
               <input class="form-control" name="path" type="text" ngModel>
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-xs-3" tooltip="perfect match">method</label>
-            <div class="col-xs-8">
+            <div class="col-xs-2">
+              <input id="not_method" name="not_method" type="checkbox" ngModel>
+              <label for="not_method">Not mutch</label>
+            </div>
+            <div class="col-xs-6">
               <input class="form-control" name="method" type="text" ngModel>
             </div>
           </div>
@@ -50,14 +62,13 @@
               <input class="form-control" name="account_id" type="text" ngModel>
             </div>
           </div>
-          <!--
+
           <div class="form-group">
             <label class="control-label col-xs-3" tooltip="partial match">all columns</label>
             <div class="col-xs-8">
-              <input class="form-control" name="body" type="text" ngModel>
+              <input class="form-control" name="all_columns" type="text" ngModel>
             </div>
           </div>
-          -->
           <div class="form-group">
             <label class="control-label col-xs-3" tooltip="max fetch size">size</label>
             <div class="col-xs-8">
@@ -78,8 +89,12 @@
   <div class="card card-block card-header">
     <div class="well well-lg">
       <h4>Conditions</h4>
-      <div *ngFor="let key of ['date','code','path','method','account_id','size']" class="row">
-        <div class="col-sm-2">{{key}}</div>
+      <div *ngFor="let key of ['date','code','path','method','account_id','size', 'all_columns']" class="row">
+        <div class="col-sm-2">{{key}}
+          <span *ngIf="f.value['not_' + key]">
+            (Not match)
+          </span>
+        </div>
         <div class="col-sm-10">{{f.value[key]}}</div>
       </div>
     </div>

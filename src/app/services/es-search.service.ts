@@ -41,33 +41,69 @@ export class EsSearchService {
     }
 
     if (params.code) {
-      bodyParams["query"]["bool"]["filter"].push(
-        {
-          "terms":
-            { "payload_response_code": params.code.split(',') }
-        }
-      );
+      if (params.not_code){
+        bodyParams["query"]["bool"]["filter"].push(
+          {
+            "bool": {
+              "must_not": {
+                "terms": {
+                  "payload_response_code": params.code.split(',')
+                }
+              }
+            }
+          }
+        )
+      }else{
+        bodyParams["query"]["bool"]["filter"].push(
+          {
+            "terms":
+              { "payload_response_code": params.code.split(',') }
+          }
+        );
+      }
     }
 
     if (params.path) {
-      bodyParams["query"]["bool"]["filter"].push(
-        {
-          "wildcard":
-            {"payload_request_path": '*' + params.path + '*' }
-        }
-      );
+      if (params.not_path) {
+        bodyParams["query"]["bool"]["filter"].push(
+          {
+            "bool": {
+              "must_not": {
+                "wildcard":
+                  {"payload_request_path": '*' + params.path + '*' }
+              }
+            }
+          }
+        )
+      } else {
+        bodyParams["query"]["bool"]["filter"].push(
+          {
+            "wildcard":
+              {"payload_request_path": '*' + params.path + '*' }
+          }
+        );
+      }
     }
 
     if (params.method) {
-      bodyParams["query"]["bool"]["filter"].push(
-        {
+      if (params.not_method) {
+        bodyParams["query"]["bool"]["filter"].push({
+          "bool": {
+            "must_not": {
+              "term":
+                {"payload_request_method": params.method }
+            }
+          }
+        })
+      } else {
+        bodyParams["query"]["bool"]["filter"].push({
           "term":
             {"payload_request_method": params.method }
-        }
-      );
+        })
+      }
     }
 
-    if (params.body) {
+    if (params.all_columns) {
       bodyParams["query"]["bool"]["filter"].push(
         {
           "filtered":{

@@ -47,24 +47,24 @@ export class AgGridComponent implements OnChanges {
         headerName: "path",
         field: "payload_request_path",
         cellRendererFramework: AgGridCellSearchParamsComponent,
-        width: 150
+        width: 300
       },
       {
         headerName: "request body",
         field: "payload_request_body_0",
         cellRendererFramework: AgGridCellSearchParamsComponent,
-        width: 100
+        width: 150
       },
       {
         headerName: "code",
         field: "payload_response_code",
-        width: 80
+        width: 60
       },
       {
         headerName: "response body",
         field: "payload_response_body",
         cellRendererFramework: AgGridCellJsonDataComponent,
-        width: 400
+        width: 150
       }
 
     ];
