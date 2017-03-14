@@ -1,0 +1,110 @@
+<div class="container">
+  <div style="display: block;">
+    <div class="col-xs-2"></div>
+    <div class="col-xs-10">
+      <h1>
+        Twitter Api
+        <i class="fa fa-twitter"></i>
+      </h1>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="form-horizontal">
+    <accordion>
+      <accordion-group #searchConditionGroup>
+        <div accordion-heading>
+          Search Conditions
+          <i class="pull-right float-xs-right glyphicon"
+            [ngClass]="{'glyphicon-chevron-down': searchConditionGroup?.isOpen, 'glyphicon-chevron-right': !searchConditionGroup?.isOpen}"></i>
+        </div>
+        <form #f="ngForm">
+          <div class="form-group">
+            <label class="control-label col-xs-3">date</label>
+            <div class="col-xs-8">
+              <datepicker name="date" ngModel></datepicker>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-xs-3" tooltip="perfect match">code</label>
+            <div class="col-xs-2">
+              <input id="not_code" name="not_code" type="checkbox" ngModel>
+              <label for="not_code">Not mutch</label>
+            </div>
+            <div class="col-xs-6">
+              <input class="form-control" name="code" type="text" ngModel>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-xs-3" tooltip="partial match">path</label>
+             <div class="col-xs-2">
+              <input id="not_path" name="not_path" type="checkbox" ngModel>
+              <label for="not_path">Not mutch</label>
+            </div>
+            <div class="col-xs-6">
+              <input class="form-control" name="path" type="text" ngModel>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-xs-3" tooltip="perfect match">method</label>
+            <div class="col-xs-2">
+              <input id="not_method" name="not_method" type="checkbox" ngModel>
+              <label for="not_method">Not mutch</label>
+            </div>
+            <div class="col-xs-6">
+              <input class="form-control" name="method" type="text" ngModel>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-xs-3" tooltip="perfect match">account id</label>
+            <div class="col-xs-8">
+              <input class="form-control" name="account_id" type="text" ngModel>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="control-label col-xs-3" tooltip="partial match">all columns</label>
+            <div class="col-xs-8">
+              <input class="form-control" name="all_columns" type="text" ngModel>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-xs-3" tooltip="max fetch size">size</label>
+            <div class="col-xs-8">
+              <select class="form-control" name="size" ngModel="10">
+                <option class="form-control" *ngFor="let n of [10,50,100,500,1000]" ngValue="{{n}}" [selected]="n==100">{{ n }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-xs-5"></div>
+            <button class="btn btn-primary" (click)="search(f.value)" >Submit</button>
+          </div>
+        </form>
+      </accordion-group>
+    </accordion>
+  </div>
+
+  <div class="card card-block card-header">
+    <div class="well well-lg">
+      <h4>Conditions</h4>
+      <div *ngFor="let key of ['date','code','path','method','account_id','size', 'all_columns']" class="row">
+        <div class="col-sm-2">{{key}}
+          <span *ngIf="f.value['not_' + key]">
+            (Not match)
+          </span>
+        </div>
+        <div class="col-sm-10">{{f.value[key]}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="card card-block card-header">
+    <div>Totall: {{totalCount}}</div>
+    <div>Fetch: {{displayCount}}</div>
+  </div>
+</div>
+
+<div class="container">
+  <app-ag-grid [searchedData]="searchedData" [isSearchingToggle]="isSearchingToggle"></app-ag-grid>
+</div>
