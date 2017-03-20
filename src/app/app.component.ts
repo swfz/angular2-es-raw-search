@@ -30,20 +30,5 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  search(params: any): void {
-    this.isSearchingToggle =  ( this.isSearchingToggle ) ? false : true;
-    this.esSearchService.search(params).subscribe(
-      data => {
-        this.searchedData = data.hits.hits.map(row => row._source);
-        this.totalCount   = data.hits.total;
-        this.displayCount = data.hits.hits.length;
-      },
-      error => {
-        console.log('search error');
-      }
-    );
-  }
-
 }
 

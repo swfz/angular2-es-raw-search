@@ -3,10 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 
 import {PageNotFoundComponent} from "./components/page-not-found.component";
 import {TwitterApiComponent} from "./components/twitter-api/twitter-api.component";
+import {AccessLogComponent} from "./components/access-log/access-log.component";
 
 const appRoutes: Routes = [
   { path: 'twitter-api', component: TwitterApiComponent },
-//  { path: 'access-log', component: AccessLogComponent },
+  { path: 'access-log', component: AccessLogComponent },
   { path: '', redirectTo: '/twitter-api', pathMatch: 'full'},
   { path: '**',  component: PageNotFoundComponent },
 ];

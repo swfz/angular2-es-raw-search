@@ -7,15 +7,20 @@ import { AgGridModule } from "ag-grid-angular/main";
 import { AppRoutingModule } from "./app-routing.module";
 
 import * as bootstrap from 'ng2-bootstrap';
-
 import { AppComponent } from './app.component';
-import { AgGridComponent } from './components/ag-grid/ag-grid.component';
-
 import { EsSearchService } from "./services/es-search.service";
-import { AgGridCellJsonDataComponent } from './components/ag-grid/ag-grid-cell/ag-grid-cell-json-data/ag-grid-cell-json-data.component';
-import { AgGridCellSearchParamsComponent } from './components/ag-grid/ag-grid-cell/ag-grid-cell-search-params/ag-grid-cell-search-params.component';
-import {PageNotFoundComponent} from "./components/page-not-found.component";
-import {TwitterApiComponent} from "./components/twitter-api/twitter-api.component";
+
+import { AgGridComponent } from './components/ag-grid/ag-grid.component';
+import {
+  AgGridCellJsonDataComponent,
+  AgGridCellSearchParamsComponent
+} from './components/ag-grid/ag-grid-cell';
+
+import { PageNotFoundComponent } from "./components/page-not-found.component";
+import { TwitterApiComponent } from "./components/twitter-api/twitter-api.component";
+import { TwitterApiService } from "./components/twitter-api/twitter-api.service";
+import { AccessLogComponent } from './components/access-log/access-log.component';
+import { AccessLogService } from "./components/access-log/access-log.service";
 
 
 @NgModule({
@@ -26,6 +31,7 @@ import {TwitterApiComponent} from "./components/twitter-api/twitter-api.componen
     AgGridCellSearchParamsComponent,
     TwitterApiComponent,
     PageNotFoundComponent,
+    AccessLogComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,6 +55,8 @@ import {TwitterApiComponent} from "./components/twitter-api/twitter-api.componen
     bootstrap.TypeaheadModule.forRoot(),
   ],
   providers: [
+    TwitterApiService,
+    AccessLogService,
     EsSearchService
   ],
   bootstrap: [AppComponent]
